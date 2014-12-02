@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <algorithm>
 
 using namespace std;
    
@@ -23,9 +24,19 @@ void vector_addition(const vector<float> &a, const vector<float> &b, vector<floa
 
 int main()
 {
-	vector<float> a = {1.0, 2.1, 3.5, 6.1};
-   vector<float> b = {1.0, 2.1, 3.5, 6.1};
+   const size_t vector_size = 5;
+   vector<float> a;
+   vector<float> b;
    vector<float> c;
+
+   a.reserve(vector_size);
+   b.reserve(vector_size);
+   c.reserve(vector_size);
+
+   // Generate random vectors.
+   srand(time(NULL));
+   generate_n(back_inserter(a), vector_size, []() { return rand() % 100; });
+   generate_n(back_inserter(b), vector_size, []() { return rand() % 100; });
 
    vector_addition(a, b, c);
 
